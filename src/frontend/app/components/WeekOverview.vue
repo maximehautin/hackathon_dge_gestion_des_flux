@@ -17,10 +17,10 @@ defineProps<{
 const emit = defineEmits<{ select: [date: string] }>();
 </script>
 <template>
-  <section class="week-section">
+  <section class="week-section" id="semaine">
     <div class="section-heading">
       <h2>Votre semaine en un regard</h2>
-      <span>Lundi → Dimanche</span>
+      <span>Choisissez une journée</span>
     </div>
     <div class="week-grid">
       <button

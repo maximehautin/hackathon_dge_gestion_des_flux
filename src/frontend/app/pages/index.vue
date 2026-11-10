@@ -43,12 +43,12 @@ const trainLabel = computed(() => {
   <div v-if="error" role="alert" class="api-error">
     {{ error }}
   </div>
-  <main>
+  <main id="previsions">
     <div v-if="loading" class="loading" aria-live="polite">Chargement des prévisions…</div>
     <div class="context">
       <div class="site-picker">
-        <label for="site">Site touristique</label
-        ><select id="site" v-model="siteId">
+        <label for="siteSelect">Site touristique</label
+        ><select id="siteSelect" v-model="siteId">
           <option v-for="item in sites" :key="item.id" :value="item.id">
             {{ item.name }}
           </option>
@@ -95,11 +95,11 @@ const trainLabel = computed(() => {
         <span>Détail de la journée</span
         ><strong>{{ longDate(selected.date) }}</strong>
       </div>
-      <section class="summary-grid">
+      <section class="summary-grid" aria-label="Synthèse de la journée">
         <div class="metric">
-          <span class="muted small">Vigilance prévisionnelle</span>
+          <div class="label">Vigilance prévisionnelle</div>
           <div class="value">{{ levelLabels[selected.level] }}</div>
-          <span class="small"
+          <span class="status"
             ><i class="dot" :class="selected.level" />{{
               selected.level === "low"
                 ? "Pas de dépassement prévu"
@@ -108,32 +108,67 @@ const trainLabel = computed(() => {
           >
         </div>
         <div class="metric">
-          <span class="muted small">Passages prévus sur la journée</span>
+          <div class="label">Passages prévus sur la journée</div>
           <div class="value">
             {{ selected.forecast.total }} <small>passages</small>
           </div>
-          <span class="muted small"
-            >{{ site.name }} · passages entrants</span
-          >
+          <span class="sub">{{ site.name }} · passages entrants</span>
         </div>
-        <div class="metric">
-          <span class="muted small">Météo de la journée</span>
-          <div class="value weather">
-            {{ selected.forecast.rain === 0 ? "☀ Temps sec" : "☂ Pluie" }}
+        <div class="metric weather-metric">
+          <div class="label">Météo de la journée</div>
+          <div class="weather-main">
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 40 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <template v-if="selected.forecast.rain === 0">
+                <circle cx="20" cy="20" r="7" />
+                <path
+                  d="M20 3v5m0 24v5M3 20h5m24 0h5M8 8l4 4m16 16 4 4M8 32l4-4M28 12l4-4"
+                />
+              </template>
+              <template v-else>
+                <path
+                  d="M10 26a7 7 0 1 1 1-14 9 9 0 0 1 17 2 6 6 0 0 1 1 12H10Z"
+                />
+                <path d="m14 30-2 5m9-5-2 5m9-5-2 5" />
+              </template>
+            </svg>
+            <div class="value">
+              {{
+                selected.forecast.rain === 0
+                  ? "Temps sec"
+                  : selected.forecast.rain < 1
+                    ? "Pluie faible"
+                    : "Pluie"
+              }}
+            </div>
           </div>
-          <span class="muted small"
-            >{{ selected.forecast.rain.toLocaleString("fr-FR") }} mm de
-            précipitations · Neige : 0 cm</span
-          >
+          <div class="sub">
+            {{ selected.forecast.rain.toLocaleString("fr-FR") }} mm de
+            précipitations · Neige : 0 cm
+          </div>
         </div>
       </section>
-      <HourlyChart
-        :peak="selected.forecast.peak"
-        :total="selected.forecast.total"
-        :reference="selected.forecast.reference"
-        :threshold="thresholds.moderate"
-        :date="longDate(selected.date)"
-      />
+      <div class="layout">
+        <div class="column left"></div>
+        <div class="column right">
+          <HourlyChart
+            :peak="selected.forecast.peak"
+            :total="selected.forecast.total"
+            :reference="selected.forecast.reference"
+            :threshold="thresholds.moderate"
+            :date="longDate(selected.date)"
+          />
+          <ThresholdSettings v-model="thresholds" />
+        </div>
+      </div>
     </template>
 
     <!-- Détail historique (jours passés avec données CSV) -->
@@ -159,7 +194,7 @@ const trainLabel = computed(() => {
     </template>
 
     <!-- Aucune donnée disponible pour la période -->
-    <section v-else class="empty">
+    <section v-else class="history-empty">
       <h2>
         {{
           site.available
@@ -190,9 +225,8 @@ const trainLabel = computed(() => {
         Revenir à l’Herretang · aujourd’hui
       </button>
     </section>
-    <ThresholdSettings v-model="thresholds" />
-    <details class="sources">
-      <summary>Sources, fiabilité et limites</summary>
+    <details class="trust" id="sources">
+      <summary>Sources, fiabilité et limites de la prévision</summary>
       <p>
         Prévisions fournies par le modèle XGBoost de l’équipe 2. La courbe
         horaire est illustrative (répartition type) et non issue du modèle journalier.
@@ -208,8 +242,9 @@ const trainLabel = computed(() => {
         actualiser). Aucun service de notification n’est connecté.
       </p>
     </details>
-    <footer>
-      Prévisions XGBoost · Météo Open-Meteo · Hackathon DGE · Équipe 2
-    </footer>
+    <div class="footer-line">
+      <span>Prévisions XGBoost · Météo Open-Meteo</span
+      ><span>Hackathon DGE · Équipe 2</span>
+    </div>
   </main>
 </template>

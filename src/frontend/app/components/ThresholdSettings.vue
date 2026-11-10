@@ -17,11 +17,11 @@ watch([moderate, high], () => {
 });
 </script>
 <template>
-  <section class="threshold-panel">
-    <div class="section-heading">
+  <section class="panel threshold-panel" aria-labelledby="thresholdTitle">
+    <div class="threshold-heading">
       <div>
-        <h2>Vos seuils de vigilance</h2>
-        <p class="muted small">
+        <h2 id="thresholdTitle">Vos seuils de vigilance</h2>
+        <p class="threshold-description">
           Choisissez à partir de combien de passages par jour le niveau change.
         </p>
       </div>
@@ -34,7 +34,7 @@ watch([moderate, high], () => {
         class="threshold-editor"
       >
         <label :for="key"
-          ><i class="dot" :class="key" />Vigilance
+          ><i class="dot" :class="{ 'red-dot': key === 'high' }" />Vigilance
           {{ key === "moderate" ? "modérée" : "élevée" }}</label
         >
         <div class="threshold-input">
@@ -68,15 +68,17 @@ watch([moderate, high], () => {
       </div>
     </div>
     <div class="threshold-preview" aria-live="polite">
-      <div class="low">
-        <strong>Faible</strong><span>Moins de {{ model.moderate }}</span>
+      <div>
+        <i class="preview-line low-line" /> <strong>Faible</strong
+        ><span>Moins de {{ model.moderate }}</span>
       </div>
-      <div class="moderate">
-        <strong>Modérée</strong
+      <div>
+        <i class="preview-line moderate-line" /> <strong>Modérée</strong
         ><span>{{ model.moderate }} à {{ model.high - 1 }}</span>
       </div>
-      <div class="high">
-        <strong>Élevée</strong><span>{{ model.high }} et plus</span>
+      <div>
+        <i class="preview-line high-line" /> <strong>Élevée</strong
+        ><span>{{ model.high }} et plus</span>
       </div>
     </div>
     <p v-if="!valid" role="alert" class="error small">
@@ -84,11 +86,15 @@ watch([moderate, high], () => {
       valeurs valides restent appliquées.
     </p>
     <div class="threshold-bottom">
-      <span class="muted small"
-        >Seuils de passages journaliers, sans mesure de l’occupation.</span
-      ><span class="small">{{
-        valid ? "● Application automatique" : "Valeurs à corriger"
-      }}</span>
+      <p class="note">
+        Ces seuils portent sur les passages journaliers, pas sur l’occupation du
+        site.
+      </p>
+      <span class="auto-apply" role="status"
+        ><i v-if="valid" />{{
+          valid ? "Application automatique" : "Valeurs à corriger"
+        }}</span
+      >
     </div>
   </section>
 </template>
