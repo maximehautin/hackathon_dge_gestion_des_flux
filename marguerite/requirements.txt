@@ -1,0 +1,12 @@
+pandas>=2.2
+pyarrow>=15
+openpyxl>=3.1
+numpy>=1.26
+scikit-learn>=1.4
+lightgbm>=4.3
+holidays>=0.40
+requests>=2.31
+fastapi>=0.110
+uvicorn[standard]>=0.27
+sentence-transformers
+mcp==1.30.0

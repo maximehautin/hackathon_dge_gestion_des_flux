@@ -1,0 +1,157 @@
+<div class="phone" id="phone">
+  <header class="bar">
+    <button class="iconbtn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div class="brand" aria-hidden="true">__LOGO_SMALL__<b>MARGUERITE</b></div>
+    <button class="iconbtn" id="profileBtn" aria-label="Mon profil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></button>
+  </header>
+  <nav class="menu" id="menu" aria-label="Navigation">
+    <button data-go="profil">Mon profil</button>
+    <button data-go="resultat">Mes envies</button>
+    <button data-go="camp">Mon camp de base</button>
+    <button data-go="programme">Mon séjour</button>
+    <button data-go="pros">Professionnels du vélo</button>
+    <button data-go="territoire">Vue territoire</button>
+  </nav>
+  <main>
+    <section id="splash" class="on" aria-label="Accueil">
+      <div class="tile">__LOGO_BIG__<span>MARGUERITE</span></div>
+      <h1 style="text-align:center">Vos vacances à vélo, en étoile</h1>
+      <p>Dites-nous ce qui vous tente : Marguerite trouve où poser vos valises, puis compose chaque jour une boucle à vélo vers ces activités, au moment où elles sont le plus calmes.</p>
+      <button class="btn" data-go="profil" style="max-width:320px">Créer mon séjour</button>
+    </section>
+
+    <section id="profil" class="screen" aria-labelledby="pTitle">
+      <h1 id="pTitle">Votre séjour</h1>
+      <p class="sub">Quelques informations pour commencer. Vos envies, nous les découvrons ensuite ensemble.</p>
+      <div class="panel">
+        <div class="field"><label for="fName">Nom Prénom</label><input id="fName" type="text" autocomplete="name" placeholder="Camille Martin"></div>
+        <div class="field"><span class="lbl" id="lblProf">Vous partez</span>
+          <div class="tiles" role="group" aria-labelledby="lblProf" id="chipsProf">
+            <button type="button" class="chip ptile" data-v="solo" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.5" r="3.3"/><path d="M5.5 20.5c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5"/></svg><span>En solo</span></button>
+            <button type="button" class="chip ptile" data-v="couple" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.8"/><circle cx="16.2" cy="8" r="2.8"/><path d="M2.5 20.5c0-3 2.5-5.5 5.5-5.5 1.6 0 3 .7 4 1.8"/><path d="M10.7 20.5c0-3 2.5-5.5 5.5-5.5s5.5 2.500 5.5 5.5"/></svg><span>En couple</span></button>
+            <button type="button" class="chip ptile" data-v="famille" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.8" cy="6.8" r="2.5"/><circle cx="17.2" cy="6.800" r="2.5"/><circle cx="12" cy="12.6" r="1.9"/><path d="M2.300 20.500c0-2.500 2-4.500 4.500-4.500"/><path d="M21.7 20.500c0-2.500-2-4.500-4.500-4.500"/><path d="M8.600 20.500c0-1.900 1.500-3.400 3.400-3.400s3.400 1.500 3.400 3.400"/></svg><span>En famille</span></button>
+            <button type="button" class="chip ptile" data-v="amis" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="7.300" r="2.900"/><circle cx="4.900" cy="9.800" r="2"/><circle cx="19.100" cy="9.800" r="2"/><path d="M6.300 20.500c0-3.100 2.600-5.700 5.700-5.700s5.700 2.600 5.700 5.700"/><path d="M1.500 19.500c0-1.900 1.300-3.500 3-4"/><path d="M22.500 19.500c0-1.900-1.300-3.500-3-4"/></svg><span>En groupe</span></button>
+          </div></div>
+        <div class="field"><label for="fRegion">Destination</label>
+          <select id="fRegion">
+            <option value="38" selected>Isère</option>
+            <option disabled>Savoie (bientôt disponible)</option>
+            <option disabled>Haute-Savoie (bientôt disponible)</option>
+            <option disabled>Drôme (bientôt disponible)</option>
+            <option disabled>Hautes-Alpes (bientôt disponible)</option>
+          </select><div class="hint">La démonstration couvre l’Isère.</div></div>
+        <div class="field"><span class="lbl">Dates du séjour</span>
+          <div class="row2"><input id="fStart" type="date" aria-label="Date d’arrivée" value="2027-07-10"><input id="fEnd" type="date" aria-label="Date de départ" value="2027-07-16"></div>
+          <div class="err" id="errDates" role="alert"></div></div>
+        <div class="field"><span class="lbl" id="lblVelo">Votre vélo</span>
+          <div class="chips" role="group" aria-labelledby="lblVelo" id="chipsVelo">
+            <button type="button" class="chip" data-v="classique" aria-pressed="true">Vélo classique</button>
+            <button type="button" class="chip" data-v="vae" aria-pressed="false">Vélo électrique</button>
+          </div></div>
+        <div class="field"><label for="fKm">Distance à vélo par jour : <b id="kmVal">30 km</b></label>
+          <input id="fKm" type="range" min="10" max="100" step="5" value="30">
+          <div class="echelle" aria-hidden="true"><span>10 km</span><span>balade</span><span>sortie</span><span>grande sortie</span><span>100 km</span></div>
+          <div class="hint" id="kmHint" role="status"></div></div>
+        <button class="btn" id="okProfil">Découvrir les activités</button>
+      </div>
+    </section>
+
+    <section id="swipe" class="screen" aria-labelledby="swTitle">
+      <h1 id="swTitle">Qu’est-ce qui vous tente ?</h1>
+      <p class="sub">Des activités réelles en Isère, accessibles avec votre distance quotidienne. Glissez à droite pour oui, à gauche pour non (ou utilisez les boutons, ou les flèches du clavier). Marguerite s’adapte à chaque réponse.</p>
+      <div class="progress" id="swProg" aria-hidden="true"></div>
+      <div class="stack" id="stack" aria-live="polite"></div>
+      <div class="swbtns"><button class="swbtn no" id="swNo" aria-label="Pas pour moi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <button class="swbtn yes" id="swYes" aria-label="Ça me tente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></button></div>
+    </section>
+
+    <section id="resultat" class="screen" aria-labelledby="rTitle">
+      <h1 id="rTitle"></h1>
+      <p class="sub" id="rSub"></p>
+      <div class="panel">
+        <div class="field" style="margin-bottom:0"><span class="lbl">Vos envies</span><div id="sliders"></div><div class="hint">Déduites de vos choix. Vous pouvez les ajuster.</div></div>
+      </div>
+      <div class="actions"><button class="btn" id="resOk">Trouver mon camp de base</button><button class="btn ghost" data-go="swipe">Recommencer le tri</button></div>
+    </section>
+
+    <section id="camp" class="screen" aria-labelledby="cTitle">
+      <button class="btn small ghost" data-go="resultat">Retour à mes envies</button>
+      <h1 id="cTitle" style="margin-top:14px">Où poser vos valises ?</h1>
+      <p class="sub" id="cSub"></p>
+      <div id="campLoad" class="flux" role="status" hidden></div>
+      <div class="map" id="campMapBox" hidden><div id="mapCamp" style="height:250px"></div></div>
+      <div id="campList"></div>
+      <p class="note">348 communes d’Isère comparées. Chaque commune est notée sur le nombre d’activités de saison à votre goût accessibles à vélo, la qualité des aménagements cyclables d’après les itinéraires touristiques GéoVélo, et l’offre d’hébergement Apidae.</p>
+    </section>
+
+    <section id="programme" class="screen" aria-labelledby="gTitle">
+      <h1 id="gTitle">Ma semaine à vélo en Isère</h1>
+      <p class="sub" id="gDates"></p>
+      <div class="field" id="hebBox" hidden style="margin:12px 0 0"><label for="hebSel">Votre hébergement</label><select id="hebSel"></select><div class="hint">Hébergements Apidae à moins de 5 km. Ceux qui prêtent ou louent des vélos, ou disposent d’un abri à vélos, sont signalés. Le séjour est recalculé depuis l’adresse choisie.</div></div>
+      <div class="daisywrap"><svg id="daisy" viewBox="0 0 160 160" role="img" aria-label="Vos boucles autour de l’hébergement"></svg>
+        <div class="legend"><div>Chaque pétale est une journée, orientée vers sa direction, longue comme sa boucle.</div>
+          <div><span class="dot" style="background:var(--calm)"></span>Affluence calme</div>
+          <div><span class="dot" style="background:var(--mid)"></span>Affluence modérée</div>
+          <div><span class="dot" style="background:var(--high)"></span>Affluence forte</div></div></div>
+      <div id="tip"></div>
+      <div id="loading" class="flux" role="status" hidden></div>
+      <p class="q">Ce programme vous convient-il ?</p>
+      <div id="days"></div>
+      <div class="actions">
+        <button class="btn" id="validBtn">Valider mon programme</button>
+        <button class="btn ghost" data-go="camp">Changer de camp de base</button>
+      </div>
+      <p class="hint" id="validMsg" role="status" style="text-align:center;margin-top:10px"></p>
+      <button type="button" class="suite" id="prosBtn" hidden>
+        <span class="mk" style="background:var(--leaf-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:20px;height:20px"><circle cx="6" cy="16.5" r="3.5"/><circle cx="18" cy="16.5" r="3.5"/><path d="M6 16.5 9.5 9h5l3.5 7.5M9.5 9l2.5 7.5 3-7.5M13 6h3"/></svg></span>
+        <span><b>Les professionnels du vélo aux alentours</b><span class="cat" id="prosResume"></span></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </section>
+
+    <section id="pros" class="screen" aria-labelledby="prTitle">
+      <button class="btn small ghost" data-go="programme">Retour au programme</button>
+      <h1 id="prTitle" style="margin-top:14px">Les professionnels du vélo aux alentours</h1>
+      <p class="sub" id="prSub"></p>
+      <div class="map" id="prosMapBox" hidden><div id="mapPros" style="height:230px"></div></div>
+      <div id="loueurs" class="loueurs"></div>
+      <p class="note">Loueurs et réparateurs : DATAtourisme et Apidae, établissements en activité (période d’ouverture récente ou fiche mise à jour dans l’année), complétés en direct par OpenStreetMap, qui n’indique pas si un commerce est toujours en activité. Hébergements : prestations déclarées dans Apidae. Distances à vol d’oiseau depuis votre point de départ. Vérifiez la disponibilité auprès de chaque professionnel.</p>
+    </section>
+
+    <section id="jour" class="screen" aria-labelledby="jTitle">
+      <button class="btn small ghost" data-go="programme">Retour au programme</button>
+      <h1 id="jTitle" style="margin-top:14px"></h1>
+      <p class="sub" id="jSub"></p>
+      <div class="map"><div id="map" style="height:330px"></div></div>
+      <div class="stats" id="jStats"></div>
+      <div id="jFlux" aria-live="polite"></div>
+      <div class="change-loop">
+        <h2>Ajuster cette journée</h2>
+        <div id="dayFeedbackForm">
+          <label id="dayRequestLabel" for="dayRequest">Votre retour</label>
+          <textarea id="dayRequest" rows="3" maxlength="1000" placeholder="Ex. : remplace la 2e étape par quelque chose de plus calme, ajoute une pause gourmande, moins de dénivelé…"></textarea>
+          <button type="button" class="btn ghost" id="sendDayFeedback">Envoyer</button>
+        </div>
+        <div id="agentProgress" class="agent-progress" role="status" aria-live="polite" hidden>
+          <div class="agent-progress-heading">
+            <span class="agent-progress-spinner" aria-hidden="true"></span>
+            <span>Ajustement de votre journée…</span>
+          </div>
+          <ol id="agentProgressMessages" class="agent-progress-list"></ol>
+        </div>
+        <p class="hint" id="changeStatus" role="status" aria-live="polite"></p>
+      </div>
+      <ol class="steps" id="steps"></ol>
+    </section>
+
+    <section id="territoire" class="screen" aria-labelledby="tTitle">
+      <h1 id="tTitle">Vue territoire</h1>
+      <p class="sub">Ce que ce séjour apporte au territoire. Vue destinée aux offices de tourisme et aux loueurs de vélos.</p>
+      <div class="kpis" id="kpis"></div>
+      <h3 style="margin:20px 0 4px;font-size:15px">Affluence prévue sur les sites programmés</h3>
+      <div class="bars" id="bars"></div>
+      <p class="note">Données : catalogue d’activités, hébergements et photos Apidae (sélections hackathon), itinéraires touristiques (profil RIDE) calculés par l’API GéoVélo, fonds de carte Plan IGN (© IGN), avec un fond OpenStreetMap en secours. Les prévisions d’affluence proviennent de Flux Isère, avec un modèle de démonstration en repli. Dépense locale : hypothèse de 68 € par personne et par jour, à sourcer.</p>
+    </section>
+  </main>
+  <div class="scrim" id="scrim"><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sTitle" id="sheet"></div></div>
+</div>
