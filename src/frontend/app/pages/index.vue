@@ -100,7 +100,7 @@ const trainLabel = computed(() => {
           <div class="label">Vigilance prévisionnelle</div>
           <div class="value">{{ levelLabels[selected.level] }}</div>
           <span class="status"
-            ><i class="dot" :class="selected.level" />{{
+            ><i class="dot" :style="{ background: selected.level === 'high' ? '#ac4747' : selected.level === 'low' ? '#61785a' : '#b58300' }" />{{
               selected.level === "low"
                 ? "Pas de dépassement prévu"
                 : "À surveiller autour de 14 h"

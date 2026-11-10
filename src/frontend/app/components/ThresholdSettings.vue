@@ -81,7 +81,7 @@ watch([moderate, high], () => {
         ><span>{{ model.high }} et plus</span>
       </div>
     </div>
-    <p v-if="!valid" role="alert" class="error small">
+    <p v-if="!valid" role="alert" class="note" style="color:#a22">
       Le seuil élevé doit être supérieur au seuil modéré (entiers de 1 à 2 000). Les dernières
       valeurs valides restent appliquées.
     </p>
