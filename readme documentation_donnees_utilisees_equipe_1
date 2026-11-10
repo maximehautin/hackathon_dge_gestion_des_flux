@@ -10,4 +10,6 @@ Chemins et sentiers balisés issus de OSM.
 
 Un filtrage des comptages journaliers a été réalisé en  selectionnant les comptages estivaux (juin, juillet, aout) lié à l'activité pedestre (pedestrian) . Ils ont été transformé en estimation voiture / jour en ramenant le chiffre une activité journaliere et en partant du principe que 2,5 pietons etaient dans une voiture.  
 
-Les données parkings d'OSM ont été transformées en grille carrée sur l'Isère 500x500m en integrant la capacité maximale (nombreb de places) et le nombre de parkings présents (en l'absence d'un nombre de place) 
+Les données parkings d'OSM ont été transformées en grille carrée sur l'Isère 500x500m en integrant la capacité théorique maximale (nombreb de places) et le nombre de parkings présents (en l'absence d'un nombre de place) 
+
+Les jeux de données finaux produits sont disponibles dans le GitHub
