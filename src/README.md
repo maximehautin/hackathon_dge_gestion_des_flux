@@ -102,4 +102,4 @@ pour la description des colonnes, des sources et des précautions d'usage.
 
 ## Frontend Nuxt
 
-L'interface est dans [`frontend/`](frontend/README.md). Elle se lance indépendamment du pipeline Python avec `cd src/frontend && npm ci && npm run dev`. Les données affichées sont actuellement des fixtures de démonstration ; le raccordement à une API reste à réaliser.
+L'interface est dans [`frontend/`](frontend/README.md). Elle se lance via Docker Compose (`docker compose up`) ou indépendamment avec `cd src/frontend && npm ci && npm run dev`. Elle consomme l'API FastAPI (`src/api/`) pour les prévisions, l'historique CSV et le déclenchement d'entraînement.

@@ -156,20 +156,15 @@ const trainLabel = computed(() => {
           </div>
         </div>
       </section>
-      <div class="layout">
-        <div class="column left"></div>
-        <div class="column right">
-          <HourlyChart
-            :peak="selected.forecast.peak"
-            :total="selected.forecast.total"
-            :reference="selected.forecast.reference"
-            :threshold="thresholds.moderate"
-            :date="longDate(selected.date)"
-          />
-          <ThresholdSettings v-model="thresholds" />
-        </div>
-      </div>
+      <HourlyChart
+          :peak="selected.forecast.peak"
+          :total="selected.forecast.total"
+          :reference="selected.forecast.reference"
+          :threshold="thresholds.moderate"
+          :date="longDate(selected.date)"
+        />
     </template>
+    <ThresholdSettings v-model="thresholds" />
 
     <!-- Détail historique (jours passés avec données CSV) -->
     <template v-else-if="selected?.historical !== null && selected?.historical !== undefined && selected.level">

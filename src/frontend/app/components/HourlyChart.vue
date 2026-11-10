@@ -66,12 +66,12 @@ const peakY = computed(() => y(props.peak));
 <template>
   <section class="chart-card">
     <h2>À quelle heure prévoir le plus de passages ?</h2>
-    <div class="chart-caption">Passages entrants par heure · <span id="chartDate">{{ date }}</span></div>
+    <div class="chart-caption">Passages entrants par heure · {{ date }}</div>
     <svg
       id="dailyChart"
       viewBox="0 0 460 370"
       role="img"
-      aria-label="Courbe horaire de prévision fictive et référence historique fictive"
+      :aria-label="`Courbe horaire de prévision pour le ${date}`"
     >
       <defs>
         <linearGradient id="wash" x1="0" y1="0" x2="0" y2="1">
@@ -172,11 +172,6 @@ const peakY = computed(() => y(props.peak));
       ><span><i class="swatch dashed"></i>Référence habituelle</span
       ><span><i class="swatch threshold"></i>Seuil de vigilance</span>
     </div>
-    <div class="note">La référence illustre la moyenne des mêmes jours de semaine. Toutes les valeurs de cette maquette sont simulées.</div>
-    <div class="chart-nav">
-      <button class="arrow" id="prev" aria-label="Jour précédent">‹</button
-      ><span id="navDate">{{ date }}</span
-      ><button class="arrow" id="next" aria-label="Jour suivant">›</button>
-    </div>
+    <div class="note">La référence illustre la moyenne des mêmes jours de semaine. La courbe horaire est une répartition type — le modèle est journalier.</div>
   </section>
 </template>
