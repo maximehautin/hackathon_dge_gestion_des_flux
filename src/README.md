@@ -99,3 +99,7 @@ src/
 
 Voir [`src/data/herretang_2023_2025/README.md`](data/herretang_2023_2025/README.md)
 pour la description des colonnes, des sources et des précautions d'usage.
+
+## Frontend Nuxt
+
+L'interface est dans [`frontend/`](frontend/README.md). Elle se lance indépendamment du pipeline Python avec `cd src/frontend && npm ci && npm run dev`. Les données affichées sont actuellement des fixtures de démonstration ; le raccordement à une API reste à réaliser.
