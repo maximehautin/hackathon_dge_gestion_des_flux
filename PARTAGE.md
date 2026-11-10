@@ -13,6 +13,7 @@ Pendant le hackathon de la DGE (9 et 10 novembre 2026), nous avons construit tro
 
 ## Pour aller plus vite
 
+- **Voir la vidéo de Plutôt là** : [ouvrir la vidéo](Livrables/plutot-la.mp4) (MP4, 64 Mo).
 - **Découvrir le hackathon** : [les problématiques](https://hackathon-flux-touristique.vicode.fr/problematiques) et [les propositions de projets](https://hackathon-flux-touristique.vicode.fr/propositions)  
 - **Explorer les données** : [l'onglet DataViz](https://hackathon-flux-touristique.vicode.fr/dataviz) et [les données SSP Cloud](https://hackathon-flux-touristique.vicode.fr/donnees-ssp)  
 - **Comprendre l'application** : [la documentation de Plutôt là](https://hackathon-flux-touristique.vicode.fr/plutotla)  

@@ -40,7 +40,7 @@ Aider les visiteurs à découvrir des alternatives pertinentes tout en favorisan
 
 ## Explorer le projet
 
-- **Voir la vidéo** : [regarder sur Google Drive](https://drive.google.com/file/d/1vC_3GZ53nj1inDqwUo5MWHkGotZrZEmD/view?usp=sharing).
+- **Voir la vidéo de Plutôt là** : [ouvrir la vidéo](Livrables/plutot-la.mp4) (MP4, 64 Mo).
 - **Découvrir le hackathon** : [les problématiques](https://hackathon-flux-touristique.vicode.fr/problematiques) et [les propositions de projets](https://hackathon-flux-touristique.vicode.fr/propositions).
 - **Explorer les données** : [DataViz](https://hackathon-flux-touristique.vicode.fr/dataviz) et [les données SSP Cloud](https://hackathon-flux-touristique.vicode.fr/donnees-ssp).
 - **Comprendre l’application** : [la documentation de Plutôt là](https://hackathon-flux-touristique.vicode.fr/plutotla).
@@ -62,6 +62,7 @@ L’[éditeur du widget](https://sdk.hackathon-flux-touristique.vicode.fr/editor
 - [PARTAGE.md](PARTAGE.md) : présentation des réalisations et liens de partage.
 - [Examples/](Examples/) : exemples de scripts R pour explorer les sources de données et les services utiles au projet.
 - [Livrable intermédiaire](Livrables/Livrable%20intermédiaire.md) : document de travail du hackathon.
+- [Vidéo de Plutôt là](Livrables/plutot-la.mp4) : vidéo du projet (MP4, 64 Mo).
 
 ## Licence
 
