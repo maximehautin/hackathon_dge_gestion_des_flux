@@ -40,6 +40,7 @@ Aider les visiteurs à découvrir des alternatives pertinentes tout en favorisan
 
 ## Explorer le projet
 
+- **Voir la vidéo** : [regarder sur Google Drive](https://drive.google.com/file/d/1vC_3GZ53nj1inDqwUo5MWHkGotZrZEmD/view?usp=sharing).
 - **Découvrir le hackathon** : [les problématiques](https://hackathon-flux-touristique.vicode.fr/problematiques) et [les propositions de projets](https://hackathon-flux-touristique.vicode.fr/propositions).
 - **Explorer les données** : [DataViz](https://hackathon-flux-touristique.vicode.fr/dataviz) et [les données SSP Cloud](https://hackathon-flux-touristique.vicode.fr/donnees-ssp).
 - **Comprendre l’application** : [la documentation de Plutôt là](https://hackathon-flux-touristique.vicode.fr/plutotla).
