@@ -4,6 +4,8 @@ Projet de l'**Équipe 4** au hackathon DGE « Gestion des flux touristiques » (
 
 Démo en ligne : https://flux-isere.antoine42.com/marguerite/v2
 
+Présentation au jury : [presentation/marguerite_jury.pdf](presentation/marguerite_jury.pdf)
+
 ## Le problème
 
 Les planificateurs de voyage à vélo sont pensés pour l'itinérance. Rien n'aide le visiteur qui loge au même endroit et rayonne chaque jour à vélo. Or ce séjour « en étoile » est celui qui répartit le mieux les visiteurs : dans le temps (on choisit le jour le plus calme pour chaque site), dans l'espace (une direction différente chaque jour) et vers les commerces locaux placés sur les boucles.
