@@ -472,7 +472,7 @@ async function chargerHebergements(B,heb){
 /* ---------- programme ---------- */
 function renderProgramme(){const P=S.plan; $("validMsg").textContent=""; renderDaisy(); resumePros();
   const nFree=P.days.filter(x=>x.free).length;
-  const info=P.evalues?`<div class="hint" style="margin:8px 0">Accès à vélo évalué pour ${P.evalues} lieux autour de ${esc(P.area.nom)} : le programme privilégie ceux que l’on rejoint par des voies vertes, des pistes cyclables et des rues apaisées. Vous pouvez ajuster une journée depuis sa vue détaillée.</div>`:"";
+  const info=P.evalues?`<div class="hint" style="margin:8px 0">Accès à vélo évalué pour ${P.evalues} lieux autour de ${esc(P.area.nom)} : le programme privilégie ceux que l’on rejoint par des voies vertes, des pistes cyclables et des rues apaisées. Vous pouvez changer une activité ou ajuster une journée depuis sa vue détaillée.</div>`:"";
   $("tip").innerHTML=info+(nFree?`<div class="flux">Autour de ${esc(P.area.nom)}, peu de boucles correspondent à la fois à votre distance quotidienne et à un accès vélo bien aménagé. ${S.velo!=="vae"?"Avec un vélo électrique, vous élargirez votre rayon d’action : les loueurs du territoire en proposent à la semaine.":"Augmentez votre distance quotidienne pour élargir votre rayon d’action."}</div>`:"");
   const box=$("days"); box.innerHTML="";
   P.days.forEach((x,i)=>{const b=document.createElement("button"); b.className="day"; b.type="button";
@@ -485,7 +485,7 @@ function renderProgramme(){const P=S.plan; $("validMsg").textContent=""; renderD
       <div class="kv">Temps de trajet : <b>${hm(minutes(x.loop))}</b> ${S.velo==="vae"?"en vélo électrique":"à vélo"}</div>
       <div class="kv">Parcours : <b>${x.loop.km} km</b>, ${x.loop.dplus} m de dénivelé, ${x.loop.stops.length} étape${x.loop.stops.length>1?"s":""}</div>
       <div class="kv">Voies dédiées au vélo : <b>${pct(x.loop.voies?x.loop.voies.dedie:x.loop.green||0)}</b></div>
-      <span class="pill ${lv}">${LVL[lv]}</span>${x.msg?`<div class="flux">${esc(x.msg)}</div>`:""}${x.warningVoies?`<div class="flux">Une partie de ce trajet emprunte des routes déconseillées aux vélos.</div>`:""}</div>
+      <span class="pill ${lv}">${LVL[lv]}</span>${x.modifie?` <span class="pill mid">Modifiée par vous</span>`:""}${x.msg?`<div class="flux">${esc(x.msg)}</div>`:""}${x.warningVoies?`<div class="flux">Une partie de ce trajet emprunte des routes déconseillées aux vélos.</div>`:""}</div>
       <div class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>Voir l’itinéraire</div>`;
     b.onclick=()=>openDay(i); box.appendChild(b);});
 }
@@ -619,7 +619,7 @@ async function ajusterJournee(i){
       etapes:describe(day.loop),
       autres_jours:P.days.flatMap((other,index)=>index===i||other.free?[]:[other.loop.stops])
     },
-    historique:day.versions.map(version=>({
+    historique:day.versions.slice(-20).map(version=>({
       feedback:version.feedback,
       etapes:describe(version.loop).map(({id,nom})=>({id,nom})),
       km:version.loop.km,dplus:version.loop.dplus,resume:version.resume
@@ -668,9 +668,13 @@ async function ajusterJournee(i){
     const resume=String(result.resume||"");
     const visits=[...new Set(loop.stops.map(id=>POI[id]).filter(p=>p.cat!=="gastronomie"))];
     await pool(visits,4,p=>fluxFrequentation(p,day.d,1));
-    day.versions.push({feedback,loop,resume});
-    day.loop=loop; day.t=loopT(loop,day.d); day.msg=resume;
-    day.warningVoies=Boolean(loop.voies&&loop.voies.deconseillee>0.1);
+    // Le serveur ne renvoie que deux parts de voirie : le tracé détaillé est recalculé comme à la génération.
+    appendAgentProgress("Tracé détaillé de la nouvelle boucle…");
+    const detail=await route(P.origin,loop.stops.map(id=>POI[id])).catch(()=>null);
+    const nouvelle={...(detail||{...loop,voies:null}),stops:loop.stops,id:loop.stops.join("-"),score:day.loop.score};
+    day.versions.push({feedback,loop:nouvelle,resume});
+    day.loop=nouvelle; day.t=loopT(nouvelle,day.d); day.msg=resume; day.modifie=false;
+    day.warningVoies=((nouvelle.voies||loop.voies)?.deconseillee||0)>0.1;
     field.value="";
     status.textContent="";
     setAgentProgress(false);
@@ -697,7 +701,8 @@ function openDay(i){const x=S.plan.days[i], l=x.loop, inf=loopInfo(l), P=S.plan;
   l.stops.map(s=>POI[s]).forEach((p,k)=>{const lv=level(tension(p,x.d)); const li=document.createElement("li");
     li.innerHTML=`<div class="mk" style="background:${CATCOL(p.cat)}" title="Étape ${k+1}">${picto(pictoKey(p))}</div><button type="button"><span class="cat">Étape ${k+1}</span><br><b>${esc(p.nom)}</b><div class="cat">${CATS[p.cat]}, ${esc(p.commune)}</div><span class="pill ${lv}">${LVL[lv]}</span>${P.acces&&P.acces.has(p.id)?` <span class="pill ${niveauAcces(P.acces.get(p.id))}">${libelleAcces(P.acces.get(p.id))}</span>`:""}</button>`;
     li.querySelector("button").onclick=()=>openPoi(p.id,x.d);
-    ol.appendChild(li);});
+    const ch=document.createElement("button"); ch.type="button"; ch.className="btn small ghost changer"; ch.textContent="Changer"; ch.setAttribute("aria-label",`Changer l’activité ${p.nom}`);
+    ch.onclick=()=>ouvrirRemplacement(i,p.id); li.appendChild(ch); ol.appendChild(li);});
   const back=document.createElement("li"); back.innerHTML=`<div class="mk" style="background:var(--leaf-deep)">${picto("maison")}</div><div><b>Retour : ${esc(where)}</b><div class="cat">${esc(P.area.nom)}</div></div>`; ol.appendChild(back);
   go("jour"); renderMap(l,x.d);}
 function renderMap(l,d){
@@ -730,7 +735,7 @@ function renderMap(l,d){
 }
 
 /* ---------- fiche lieu ---------- */
-const scrim=$("scrim"); let lastFocus=null;
+const scrim=$("scrim"); let lastFocus=null, replacementView=0;
 function openPoi(id,d){const p=POI[id], lv=level(tension(p,d)), freq=p.freq?.[dateKey(d)]; lastFocus=document.activeElement;
   $("sheet").innerHTML=`${p.img?`<img src="${esc(p.img)}" alt="" referrerpolicy="no-referrer" style="width:100%;height:170px;object-fit:cover;border-radius:14px;margin-bottom:12px">`:""}
    <div class="sheethead"><div><h2 id="sTitle">${esc(p.nom)}</h2><div class="cat">${CATS[p.cat]}, ${esc(p.commune)}</div></div>
@@ -742,7 +747,53 @@ function openPoi(id,d){const p=POI[id], lv=level(tension(p,d)), freq=p.freq?.[da
   <p class="src">Source : Apidae, fiche n° ${p.id}${p.credit?`. Photo © ${esc(p.credit)}`:""}</p><button class="btn ghost" id="closeSheet">Fermer</button>`;
   scrim.classList.add("on"); document.body.classList.add("sheet-open"); $("sheet").scrollTop=0; $("closeSheet").focus({preventScroll:true}); $("closeSheet").onclick=closeSheet;
   $("favBtn").onclick=e=>{const b=e.currentTarget; S.fav.has(id)?S.fav.delete(id):S.fav.add(id); b.setAttribute("aria-pressed",S.fav.has(id));};}
-function closeSheet(){scrim.classList.remove("on"); document.body.classList.remove("sheet-open"); lastFocus&&lastFocus.focus({preventScroll:true})}
+/* ---------- remplacer une activité d'une journée ---------- */
+async function alternatives(i,id){const P=S.plan, x=P.days[i], vieux=POI[id], b=budget(), rmax=rayon(b), oa=originAlt(P.area,P.origin);
+  const pris=new Set(P.days.filter(y=>!y.free).flatMap(y=>y.loop.stops));
+  const source=vieux.cat==="gastronomie"?P.area.gas:P.area.pois;
+  const candidats=source.filter(p=>!pris.has(p.id)&&hav(P.origin,p)>0.4&&hav(P.origin,p)<=rmax&&!(oa!=null&&p.alt!=null&&Math.abs(p.alt-oa)>b.d*0.6));
+  const missing=candidats.filter(p=>p.cat!=="gastronomie"&&!Number.isFinite(p.freq?.[dateKey(x.d)]?.t));
+  await pool(missing,4,p=>fluxFrequentation(p,x.d,1));
+  const C=candidats
+    .map(p=>{const d=hav(vieux,p), acc=P.acces&&P.acces.get(p.id);
+      return {p,d,meme:p.cat===vieux.cat,s:(p.cat===vieux.cat?1:0)+S.prefs[p.cat]/100+(S.liked.has(p.id)?0.6:0)+(acc?0.4*acc.note:0)+(p.img?0.1:0)-d/4-0.5*tension(p,x.d)};})
+    .sort((a,c)=>c.s-a.s);
+  // on reste dans le même secteur que l'activité remplacée quand il y a assez de choix
+  const proches=C.filter(c=>c.d<=8); if(proches.length>=3) C.splice(0,C.length,...proches);
+  // trois activités du même type, puis une idée d'un autre type pour changer
+  const out=C.filter(c=>c.meme).slice(0,3); const autre=C.find(c=>!c.meme); if(autre) out.push(autre);
+  return out.length>=2?out:C.slice(0,4);}
+async function ouvrirRemplacement(i,id){const view=++replacementView, P=S.plan, x=P.days[i], vieux=POI[id]; lastFocus=document.activeElement;
+  $("sheet").innerHTML=`<div class="sheethead"><div><h2 id="sTitle">Changer d’activité</h2><div class="cat">${cap(fmtDay(x.d))} : à la place de ${esc(vieux.nom)}</div></div></div>
+    <div id="altMsg" class="flux" role="status" hidden></div>
+    <div id="altList" class="flux" role="status">Prévisions d’affluence en cours…</div>
+    <button class="btn ghost" id="closeSheet" style="margin-top:12px">Garder l’activité actuelle</button>`;
+  scrim.classList.add("on"); document.body.classList.add("sheet-open"); $("sheet").scrollTop=0; $("closeSheet").focus({preventScroll:true}); $("closeSheet").onclick=closeSheet;
+  const alts=await alternatives(i,id);
+  if(view!==replacementView||S.plan!==P||!scrim.classList.contains("on")) return;
+  $("altList").outerHTML=`<div id="altList">${alts.length?alts.map((a,k)=>{const lv=level(tension(a.p,x.d)), acc=P.acces&&P.acces.get(a.p.id);
+      return `<div class="alt">${a.p.img?`<img src="${esc(a.p.img)}" alt="" referrerpolicy="no-referrer" onerror="this.remove()">`:`<div class="mk" style="background:${CATCOL(a.p.cat)};width:64px;height:64px;border-radius:12px">${picto(pictoKey(a.p))}</div>`}
+        <div><b>${esc(a.p.nom)}</b><div class="cat">${CATS[a.p.cat]}, ${esc(a.p.commune)}, à ${a.d.toFixed(1)} km de l’activité actuelle</div>
+        <span class="pill ${lv}">${LVL[lv]}</span>${acc?` <span class="pill ${niveauAcces(acc)}">${libelleAcces(acc)}</span>`:""}
+        <div><button type="button" class="btn small" data-alt="${k}" style="margin-top:8px">Choisir</button></div></div></div>`;}).join(""):`<p class="kv">Aucune autre activité de saison n’est disponible à portée de vélo pour cette journée.</p>`}</div>`;
+  $("sheet").querySelectorAll("[data-alt]").forEach(bt=>bt.onclick=()=>remplacer(i,id,alts[+bt.dataset.alt].p,false));}
+async function remplacer(i,id,nouveau,force){const P=S.plan, x=P.days[i], b=budget(), msg=$("altMsg"), list=$("altList");
+  msg.hidden=false; msg.textContent=`Calcul de la nouvelle boucle avec ${nouveau.nom}…`; list.querySelectorAll("button").forEach(bt=>bt.disabled=true);
+  const stops=x.loop.stops.map(s=>s===id?nouveau.id:s).map(s=>POI[s]).sort((p,q)=>bearing(P.origin,p)-bearing(P.origin,q));
+  let r=x.essai&&x.essai.id===nouveau.id?x.essai.r:null;
+  if(!r){ try{ r=await route(P.origin,stops); }catch(e){ msg.textContent="GéoVélo ne répond pas. Réessayez dans un instant."; list.querySelectorAll("button").forEach(bt=>bt.disabled=false); return; } }
+  if(!force&&(r.km>b.km||r.dplus>b.d)){ x.essai={id:nouveau.id,r};
+    msg.innerHTML=`Avec ${esc(nouveau.nom)}, la journée passerait à <b>${r.km} km</b> et <b>${r.dplus} m</b> de dénivelé, au-delà de votre limite (${b.km} km, ${b.d} m). <div class="actions" style="margin-top:8px"><button type="button" class="btn small" id="altForce">Choisir quand même</button></div>`;
+    list.querySelectorAll("button").forEach(bt=>bt.disabled=false); $("altForce").onclick=()=>remplacer(i,id,nouveau,true); return; }
+  x.essai=null; const ancien=POI[id];
+  x.loop={...r,stops:stops.map(p=>p.id),id:stops.map(p=>p.id).join("-"),score:x.loop.score};
+  x.t=loopT(x.loop,x.d); x.modifie=true; x.msg=`Vous avez remplacé ${ancien.nom} par ${nouveau.nom}. La boucle a été recalculée.`;
+  x.warningVoies=Boolean(r.voies&&r.voies.deconseillee>0.1);
+  // le remplacement manuel entre dans l'historique transmis aux ajustements suivants
+  x.versions.push({feedback:`Remplacement manuel de ${ancien.nom} par ${nouveau.nom}`,loop:x.loop,resume:x.msg});
+  closeSheet(); renderProgramme(); openDay(i); }
+
+function closeSheet(){replacementView++;scrim.classList.remove("on"); document.body.classList.remove("sheet-open"); lastFocus&&lastFocus.focus({preventScroll:true})}
 scrim.onclick=e=>{if(e.target===scrim) closeSheet()};
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSheet();closeMenu()}});
 
