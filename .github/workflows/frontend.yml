@@ -9,7 +9,7 @@ on:
       - .github/workflows/frontend.yml
   push:
     branches:
-      - frontend-io
+      - equipe_2_haihua
       - equipe_2
     paths:
       - src/frontend/**
