@@ -1,0 +1,36 @@
+services:
+  api:
+    build: ./api
+    volumes:
+      - ./data:/app/data:ro
+      - mlflow_data:/app/mlflow
+    environment:
+      - MLFLOW_TRACKING_URI=${MLFLOW_TRACKING_URI:-sqlite:////app/mlflow/mlflow.db}
+      - MLFLOW_TRACKING_USERNAME=${MLFLOW_TRACKING_USERNAME:-}
+      - MLFLOW_TRACKING_PASSWORD=${MLFLOW_TRACKING_PASSWORD:-}
+      - GIT_PYTHON_REFRESH=quiet
+      - DATA_DIR=/app/data
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    environment:
+      - NUXT_API_BASE_INTERNAL=http://api:8000
+      - NUXT_PUBLIC_API_BASE=/api
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  caddy:
+    image: caddy:2-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - api
+      - frontend
+    restart: unless-stopped
+
+volumes:
+  mlflow_data:

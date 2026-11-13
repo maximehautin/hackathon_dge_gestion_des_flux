@@ -1,0 +1,27 @@
+__pycache__/
+*.py[cod]
+mlflow.db
+mlartifacts/
+
+# Données brutes (trop lourdes pour git — garder uniquement les journaliers)
+src/data/*/frequentation_*.csv
+src/data/*/meteo_*.csv
+
+# API
+src/outputs/
+src/.env
+src/api/mlflow/
+src/api/outputs/
+src/api/.env
+
+# Frontend
+src/frontend/.output/
+src/frontend/.nuxt/
+src/frontend/node_modules/
+src/frontend/.env
+
+# Racine
+.env
+
+# Claude Code
+.claude/worktrees/

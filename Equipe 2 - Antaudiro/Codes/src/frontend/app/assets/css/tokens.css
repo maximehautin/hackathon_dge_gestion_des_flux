@@ -1,0 +1,285 @@
+/*
+ * Design tokens — DSFR / Hackathon DGE
+ * Source : export Figma (thème clair, desktop)
+ */
+
+:root {
+
+  /* ─── Couleurs de base ─────────────────────────────────────────── */
+
+  /* Neutrals */
+  --color-white:        #FFFFFF;
+  --color-black:        #222222;   /* texte principal, boutons, icônes */
+
+  /* Gris (du plus clair au plus foncé) */
+  --grey-100:  #F3F3F3;   /* fond bandes graphiques */
+  --grey-200:  #D9D9D9;   /* fond cartes / bordures légères */
+  --grey-300:  #DDDDDD;   /* border-default-grey / $grey-900 */
+  --grey-400:  #C4C4C4;   /* ligne graphique */
+  --grey-500:  #BBBABA;   /* barre jauge */
+  --grey-600:  #A8A8A8;   /* texte désactivé / placeholder */
+  --grey-700:  #929292;   /* texte secondaire / légendes */
+  --grey-800:  #737373;   /* texte jauge */
+  --grey-900:  #686868;   /* texte navigation */
+  --grey-1000: #3A3A3A;   /* text-default-grey */
+  --grey-1100: #161616;   /* text-title-grey */
+
+  /* Bleu France (DSFR) */
+  --blue-france:          #000091;   /* primary / départements sélectionnés */
+  --blue-france-artwork:  #ECECFE;   /* titre sur fond foncé */
+  --blue-france-light:    #D1D1FF;   /* départements (état par défaut) */
+
+  /* Accent / focus */
+  --color-focus:  #0A76F6;   /* anneau focus ($focus-525) */
+
+  /* Statuts / données cartographiques */
+  --data-default:  #D1D1FF;   /* département neutre */
+  --data-primary:  #000091;   /* département sélectionné */
+  --data-high:     #F95C5E;   /* alerte haute */
+  --data-medium:   #F7CA18;   /* vigilance modérée */
+
+  /* ─── Couleurs graphiques ──────────────────────────────────────── */
+
+  --chart-line:           #7209B7;   /* courbe principale */
+  --chart-reference:      #0096C7;   /* courbe de référence */
+  --chart-gradient-start: rgba(114, 9, 183, 0.34);
+  --chart-gradient-end:   rgba(255, 255, 255, 0.08);
+  --chart-threshold-high: #EF0606;   /* seuil — ligne en pointillés rouge */
+  --chart-threshold-low:  #00F5A0;   /* seuil — ligne en pointillés vert */
+  --chart-tooltip-dot:    #FFC300;   /* point tooltip */
+  --chart-bar-bg:         #F3F3F3;   /* colonnes de grille graphique */
+
+  /* ─── Décisions sémantiques ────────────────────────────────────── */
+
+  /* Backgrounds */
+  --bg-page:   var(--color-white);
+  --bg-raised: var(--color-white);   /* $background-raised-grey */
+  --bg-card:   var(--grey-200);
+  --bg-band:   var(--color-black);   /* bandeau sombre (en-tête métier) */
+
+  /* Borders */
+  --border-default:  var(--grey-300);   /* 1px solid — standard */
+  --border-card:     var(--grey-200);   /* cartes / panneaux */
+
+  /* Text */
+  --text-title:     var(--grey-1100);   /* titres */
+  --text-body:      var(--grey-1000);   /* corps de texte */
+  --text-muted:     var(--grey-700);    /* secondaire */
+  --text-disabled:  var(--grey-600);    /* désactivé */
+  --text-link:      var(--blue-france);
+  --text-on-dark:   var(--color-white);
+  --text-on-band:   var(--blue-france-artwork);
+
+  /* ─── Ombres ────────────────────────────────────────────────────── */
+
+  --shadow-sm:        0px 2px 6px rgba(0, 0, 18, 0.16);    /* en-tête / $shadow-sm */
+  --shadow-card:      0px 4px 4px rgba(34, 34, 34, 0.30);  /* cartes contenu */
+  --shadow-card-blue: 0px 4px 4px rgba(0, 0, 145, 0.30);   /* cartes sélection */
+  --shadow-icon:      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  /* ─── Rayons de bordure ────────────────────────────────────────── */
+
+  --radius-xs:   4px;    /* tooltip */
+  --radius-sm:   6px;    /* point graphique */
+  --radius-md:   13px;   /* carte jour */
+  --radius-lg:   20px;   /* carte contenu, panneaux */
+  --radius-pill: 30px;   /* boutons, barres */
+
+  /* ─── Typographie ───────────────────────────────────────────────── */
+
+  /* Familles */
+  --font-main:   'Marianne', system-ui, sans-serif;   /* UI / DSFR */
+  --font-data:   'Roboto', monospace;                 /* axes graphiques */
+  --font-serif:  Georgia, serif;                      /* devise (Liberté…) */
+
+  /* ── Échelle de tailles ──────────────────────────────────────────
+     Nomenclature : --text-{n}  où n est la taille en px
+     (aligne chaque valeur sur une ligne pour lecture rapide) */
+  --text-8:   10px;    /* marqueur "aujourd'hui", badge compact          */
+  --text-9:   11px;    /* Carto BET inline, today-marker, badge          */
+  --text-10:  12px;   /* weekday, label compact, caption                */
+  --text-11:  13px;   /* notes, légende, footer, eyebrow                */
+  --text-12:  14px;   /* Carto BET/Légende — font-weight 500            */
+  --text-13:  15px;   /* Carto BET/Texte courant & Number               */
+  --text-14:  16px;   /* 2.Corps de texte/SM — corps standard           */
+  --text-16:  18px;   /* champ select principal                         */
+  --text-17:  19px;   /* sous-titre panneaux                            */
+  --text-18:  20px;   /* titre panneau moyen                            */
+  --text-19:  21px;   /* titre section (.section-heading h2)            */
+  --text-20:  22px;   /* 1.Titres/H6 — nom du site                     */
+  --text-21:  23px;   /* input seuil (mobile)                           */
+  --text-22:  24px;   /* h1 mobile                                      */
+  --text-23:  25px;   /* comptage jour                                  */
+  --text-24:  26px;   /* Carto BET/TITLE — titre section principale     */
+  --text-25:  27px;   /* h1 desktop v1                                  */
+  --text-26:  28px;   /* métrique principale large                      */
+  --text-27:  29px;   /* .value desktop                                 */
+  --text-28:  30px;   /* h1 v2                                          */
+  --text-30:  32px;   /* .value v3 compact                              */
+  --text-32:  34px;   /* .value v2                                      */
+
+  /* ── Hauteurs de ligne ───────────────────────────────────────────
+     Nomenclature : --leading-{approx}
+     Source Figma → line-height des styles nommés              */
+  --leading-11:  11px;   /* badge compact */
+  --leading-14:  14px;   /* today-marker */
+  --leading-15:  15px;   /* Roboto axes graphiques (letter-spacing 0.5px) */
+  --leading-17:  17px;   /* Carto BET/Légende */
+  --leading-18:  18px;   /* Carto BET/Texte courant, Number */
+  --leading-24:  24px;   /* 2.Corps de texte/SM */
+  --leading-28:  28px;   /* 1.Titres/H6 */
+  --leading-33:  33px;   /* Carto BET/TITLE / H5 */
+
+  /* Rapports (unitless — pour body/paragraphes) */
+  --leading-tight:  1.1;
+  --leading-normal: 1.3;
+  --leading-relaxed: 1.5;
+  --leading-loose:   1.7;
+
+  /* ── Graisses ────────────────────────────────────────────────────*/
+  --weight-regular:    400;
+  --weight-medium:     500;
+  --weight-semibold:   600;
+  --weight-bold:       700;
+  --weight-extrabold:  800;
+
+  /* ── Espacement entre lettres ────────────────────────────────────*/
+  --tracking-tight:   -0.5px;   /* grandes valeurs numériques */
+  --tracking-normal:   0;
+  --tracking-wide:     0.1px;   /* week-caption */
+  --tracking-wider:    0.5px;   /* Roboto axes graphiques */
+  --tracking-widest:   1.5px;   /* eyebrow uppercase */
+
+  /* ── Styles texte nommés (DSFR + Carto BET) ─────────────────────
+     Usage : composez font-size + font-weight + line-height
+     en référençant les trois variables correspondantes.
+
+     Style                         size        weight         leading
+     ─────────────────────────────────────────────────────────────── */
+  /* 1.Titres/H6 · XXS · Desktop — nom du site / service */
+  --ts-h6-size:     var(--text-20);
+  --ts-h6-weight:   var(--weight-bold);
+  --ts-h6-leading:  var(--leading-28);
+
+  /* Carto BET/TITLE — titre de section carte */
+  --ts-bet-title-size:     var(--text-24);
+  --ts-bet-title-weight:   var(--weight-bold);
+  --ts-bet-title-leading:  var(--leading-33);
+
+  /* 2.Corps de texte/SM · Regular — précisions organisation */
+  --ts-body-sm-size:     var(--text-14);
+  --ts-body-sm-weight:   var(--weight-regular);
+  --ts-body-sm-leading:  var(--leading-24);
+
+  /* 2.Corps de texte/SM · Medium — libellés boutons */
+  --ts-body-sm-med-size:     var(--text-14);
+  --ts-body-sm-med-weight:   var(--weight-medium);
+  --ts-body-sm-med-leading:  var(--leading-24);
+
+  /* Carto BET/Texte courant — labels carte */
+  --ts-bet-body-size:     var(--text-13);
+  --ts-bet-body-weight:   var(--weight-regular);
+  --ts-bet-body-leading:  var(--leading-18);
+
+  /* Carto BET/Number — valeurs numériques carte */
+  --ts-bet-number-size:     var(--text-13);
+  --ts-bet-number-weight:   var(--weight-medium);
+  --ts-bet-number-leading:  var(--leading-18);
+
+  /* Carto BET/Légende — légendes carte */
+  --ts-bet-legend-size:     var(--text-12);
+  --ts-bet-legend-weight:   var(--weight-medium);
+  --ts-bet-legend-leading:  var(--leading-17);
+
+  /* Axes graphiques (Roboto) */
+  --ts-chart-label-size:     var(--text-13);
+  --ts-chart-label-weight:   var(--weight-regular);
+  --ts-chart-label-leading:  var(--leading-15);
+  --ts-chart-label-tracking: var(--tracking-wider);
+
+  /* ─── Espacements ───────────────────────────────────────────────── */
+
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  10px;
+  --space-4:  12px;
+  --space-5:  16px;
+  --space-6:  20px;
+  --space-7:  25px;
+  --space-8:  27px;
+  --space-9:  40px;
+
+  /* ─── Disposition page ──────────────────────────────────────────── */
+
+  --page-max-width: 1280px;
+  --header-height:  139px;
+  --header-padding: 12px 120px 12px 104px;
+  --header-gap:     var(--space-9);   /* 40px */
+
+  /* ─── Surfaces et états interactifs (violet marque) ───────────── */
+
+  --purple-bg-light:    #f2edf7;   /* fond bouton "aujourd'hui" */
+  --purple-bg-hover:    #faf7fd;   /* fond carte au survol */
+  --purple-bg-selected: #f5effa;   /* fond carte sélectionnée */
+  --purple-border:      #8a41c1;   /* bordure sélection */
+  --purple-muted:       #c8b0dc;   /* bordure hover */
+  --purple-shadow:      rgba(121, 11, 208, 0.04);  /* halo sélection */
+
+  /* ─── Surfaces neutres ──────────────────────────────────────────── */
+
+  --bg-body:   #fafafa;
+  --bg-subtle: #eeeeee;   /* métriques, panneaux */
+
+  /* ─── Badges de niveau ─────────────────────────────────────────── */
+
+  --level-low-bg:    #eceeeb;
+  --level-low-text:  #4c6249;
+  --level-mid-bg:    #efede2;
+  --level-mid-text:  #655820;
+  --level-high-bg:   #f4e4e4;
+  --level-high-text: #953f3f;
+
+  /* ─── Aperçu seuils (preview lines ThresholdSettings) ──────────── */
+
+  --preview-low:      #a9baa3;
+  --preview-moderate: #d3bc76;
+  --preview-high:     #c38a8a;
+
+  /* ─── Points de vigilance (dot status) ─────────────────────────── */
+
+  --dot-moderate: #ba8400;
+  --dot-low:      #61785a;
+  --dot-high:     #ac4747;
+
+  /* ─── Alerte API ────────────────────────────────────────────────── */
+
+  --alert-warning-bg:     #fff3cd;
+  --alert-warning-border: #ba9400;
+  --alert-warning-text:   #5a4a00;
+
+  /* ─── Indicateur "observé" ──────────────────────────────────────── */
+
+  --observed-color:  #667460;
+  --observed-dot-bg: #8eaa81;
+
+  /* ─── Calendrier ────────────────────────────────────────────────── */
+
+  --holiday-bg:   #eae4f5;
+  --holiday-text: #6c3c9b;
+  --vacation-bg:  #e5edf2;
+  --vacation-text:#4a6a82;
+
+  /* ─── Horizon note ──────────────────────────────────────────────── */
+
+  --horizon-dot: #b1a4be;
+
+  /* ─── Préfixe hérité (compat main.css) ─────────────────────────── */
+  /* Les variables ci-dessous maintiennent la compatibilité
+     avec les usages existants dans main.css. */
+  --ink:    var(--grey-1100);
+  --muted:  var(--grey-700);
+  --panel:  var(--grey-300);
+  --purple: #790bd0;              /* violet marque équipe 2 (hors DSFR) */
+  --line:   #e7e7e7;
+  --amber:  #ffcf00;
+}

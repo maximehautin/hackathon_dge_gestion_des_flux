@@ -1,0 +1,92 @@
+[
+  {
+    "start": "2025-07-05",
+    "end": "2025-09-01",
+    "name": "Vacances d'Été"
+  },
+  {
+    "start": "2026-05-14",
+    "end": "2026-05-18",
+    "name": "Pont de l'Ascension"
+  },
+  {
+    "start": "2027-12-18",
+    "end": "2028-01-03",
+    "name": "Vacances de Noël"
+  },
+  {
+    "start": "2026-07-04",
+    "end": "2026-09-01",
+    "name": "Vacances d'Été"
+  },
+  {
+    "start": "2025-02-22",
+    "end": "2025-03-10",
+    "name": "Vacances d'Hiver"
+  },
+  {
+    "start": "2025-10-18",
+    "end": "2025-11-03",
+    "name": "Vacances de la Toussaint"
+  },
+  {
+    "start": "2026-02-07",
+    "end": "2026-02-23",
+    "name": "Vacances d'Hiver"
+  },
+  {
+    "start": "2026-10-17",
+    "end": "2026-11-02",
+    "name": "Vacances de la Toussaint"
+  },
+  {
+    "start": "2027-04-10",
+    "end": "2027-04-26",
+    "name": "Vacances de Printemps"
+  },
+  {
+    "start": "2027-07-03",
+    "end": "2027-09-02",
+    "name": "Vacances d'Été"
+  },
+  {
+    "start": "2027-10-23",
+    "end": "2027-11-08",
+    "name": "Vacances de la Toussaint"
+  },
+  {
+    "start": "2025-05-29",
+    "end": "2025-06-02",
+    "name": "Pont de l'Ascension"
+  },
+  {
+    "start": "2024-12-21",
+    "end": "2025-01-06",
+    "name": "Vacances de Noël"
+  },
+  {
+    "start": "2025-04-19",
+    "end": "2025-05-05",
+    "name": "Vacances de Printemps"
+  },
+  {
+    "start": "2025-12-20",
+    "end": "2026-01-05",
+    "name": "Vacances de Noël"
+  },
+  {
+    "start": "2026-04-04",
+    "end": "2026-04-20",
+    "name": "Vacances de Printemps"
+  },
+  {
+    "start": "2026-12-19",
+    "end": "2027-01-04",
+    "name": "Vacances de Noël"
+  },
+  {
+    "start": "2027-02-13",
+    "end": "2027-03-01",
+    "name": "Vacances d'Hiver"
+  }
+]
