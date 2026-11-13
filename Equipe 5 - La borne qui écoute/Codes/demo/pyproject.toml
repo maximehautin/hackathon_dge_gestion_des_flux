@@ -1,0 +1,28 @@
+[project]
+name = "demo-live-avis"
+version = "0.2.0"
+description = "Démo live : borne de captation du ressenti visiteurs (STT local + Jev + SQLite + Streamlit)"
+requires-python = ">=3.12"
+dependencies = [
+  "faster-whisper>=1.1",
+  "av>=11,<19",  # av 19 a retiré `metadata_errors`, utilisé par faster-whisper 1.2.1 (decode_audio)
+  "sounddevice>=0.5",
+  "numpy>=1.26",
+  "pandas>=2",
+  "openpyxl>=3.1",
+  "pyyaml>=6",
+  "streamlit>=1.40",
+  "folium>=0.17",
+  "streamlit-folium>=0.22",
+  "httpx>=0.27",
+]
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
