@@ -1,0 +1,11 @@
+services:
+  flux-isere:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/data
+      - ./artifacts:/app/artifacts
+    environment:
+      GEOVELO_API_KEY: ${GEOVELO_API_KEY:-}
