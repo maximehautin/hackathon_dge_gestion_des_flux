@@ -1,0 +1,48 @@
+# Paramètres de démo (données, pas logique) : 5 bornes sur des ENS équipés d'un
+# éco-compteur de parking (Fréquentation/données_eco_compteurs_ENS.xlsx).
+# Coordonnées = centroïde du site ENS (Biodiversité/Habitats_naturels_ENS.gpkg).
+# À recaler sur le parking (OpenStreetMap) et à vérifier : électricité, commune
+# de rattachement (Écouges : Saint-Gervais / Rencurel ; Montfort : Crolles / Lumbin).
+# Un autre territoire = un autre fichier de ce format.
+departement: Isère, vers Grenoble (c'est-à-dire loin de Paris/Bordeaux/Marseille/Toulouse/Nice/Lille/Lyon/Nantes/Ouest/Nord/Sud)
+bornes:
+  - id: bois_batie
+    name: Bois de la Bâtie
+    id_ens: SD11
+    commune: Saint-Ismier
+    code_insee: "38397"
+    compteur: Bois de la Bâtie parking
+    lat: 45.2286
+    lon: 5.8422
+  - id: col_coq
+    name: Col du Coq
+    id_ens: SD26
+    commune: Saint-Pierre-de-Chartreuse
+    code_insee: "38442"
+    compteur: col du coq parking (chemin forestier)
+    lat: 45.3136
+    lon: 5.8322
+  - id: ecouges
+    name: Les Écouges
+    id_ens: SD28
+    commune: Saint-Gervais
+    code_insee: "38390"
+    compteur: ecouges pont chabert voiture
+    lat: 45.1880
+    lon: 5.5123
+  - id: peuil
+    name: Peuil
+    id_ens: SD09
+    commune: Claix
+    code_insee: "38111"
+    compteur: tourbière du peuil sentier parking
+    lat: 45.1221
+    lon: 5.6418
+  - id: montfort
+    name: Montfort
+    id_ens: SD15
+    commune: Crolles
+    code_insee: "38140"
+    compteur: Montfort voitures
+    lat: 45.2900
+    lon: 5.9021
